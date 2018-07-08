@@ -1,24 +1,20 @@
-package com.imooc.concurrency.example.commonunsafe;
+package com.imooc.concurrency.example.concurrent;
 
-import com.imooc.concurrency.annotation.ThreadNotSafe;
+import com.imooc.concurrency.annotation.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
+import java.util.Set;
+import java.util.concurrent.*;
 
 /**
  * @author : chris
  * 2018-07-08
  */
 @Slf4j
-@ThreadNotSafe
-public class ArrayListExample {
+@ThreadSafe
+class ConcurrentSkipListSetExample {
 
-    private static List<Integer> list = new ArrayList<>();
+    private static Set<Integer> list = new ConcurrentSkipListSet<>();
     /** 请求总数 */
     private static int clientTotal = 5000;
     /** 同时并发执行的线程数 */

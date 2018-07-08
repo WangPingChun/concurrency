@@ -1,9 +1,9 @@
-package com.imooc.concurrency.example.commonunsafe;
+package com.imooc.concurrency.example.concurrent;
 
-import com.imooc.concurrency.annotation.ThreadNotSafe;
+import com.google.common.collect.Lists;
+import com.imooc.concurrency.annotation.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -15,10 +15,10 @@ import java.util.concurrent.Semaphore;
  * 2018-07-08
  */
 @Slf4j
-@ThreadNotSafe
-public class ArrayListExample {
+@ThreadSafe
+class CopyOnWriteArrayListExample {
 
-    private static List<Integer> list = new ArrayList<>();
+    private static List<Integer> list = Lists.newCopyOnWriteArrayList();
     /** 请求总数 */
     private static int clientTotal = 5000;
     /** 同时并发执行的线程数 */

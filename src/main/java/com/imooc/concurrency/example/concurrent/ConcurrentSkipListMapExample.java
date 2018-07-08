@@ -1,28 +1,24 @@
-package com.imooc.concurrency.example.commonunsafe;
+package com.imooc.concurrency.example.concurrent;
 
-import com.imooc.concurrency.annotation.ThreadNotSafe;
+import com.imooc.concurrency.annotation.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
+import java.util.Map;
+import java.util.concurrent.*;
 
 /**
  * @author : chris
  * 2018-07-08
  */
 @Slf4j
-@ThreadNotSafe
-public class ArrayListExample {
+@ThreadSafe
+public class ConcurrentSkipListMapExample {
 
-    private static List<Integer> list = new ArrayList<>();
+    private static Map<Integer, Integer> map = new ConcurrentSkipListMap<>();
     /** 请求总数 */
     private static int clientTotal = 5000;
     /** 同时并发执行的线程数 */
-    private static int threadTotal = 200;
+    private static int threadTotal = 2000;
 
 
     public static void main(String[] args) throws InterruptedException {
@@ -44,10 +40,10 @@ public class ArrayListExample {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("list size:{}", list.size());
+        log.info("list size:{}", map.size());
     }
 
     private static void update(int count) {
-        list.add(count);
+        map.put(count, count);
     }
 }
